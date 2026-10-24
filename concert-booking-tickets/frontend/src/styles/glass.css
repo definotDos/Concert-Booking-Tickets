@@ -1,0 +1,379 @@
+.panel,
+.concert-card,
+.ticket-card,
+.table-wrap,
+.search-bar,
+.glass-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--shadow);
+}
+header {
+  background: rgb(8 11 26 / 90%);
+  backdrop-filter: blur(var(--glass-blur));
+}
+nav a.active {
+  border-color: var(--purple);
+  color: var(--ink);
+}
+.brand-mark {
+  border-color: var(--purple);
+  background: #8b5cf620;
+  color: var(--pink);
+}
+.eyebrow {
+  color: var(--cyan);
+}
+.hero {
+  background:
+    linear-gradient(90deg, #080b1af5 0%, #080b1ac7 45%, #080b1a38 100%),
+    url('../assets/concert-crowd.jpg') center / cover;
+  box-shadow: var(--shadow);
+}
+.hero-copy {
+  max-width: 70%;
+}
+.hero-copy p {
+  color: #d5daea;
+}
+.hero-art {
+  display: none;
+}
+.hero-bottom {
+  background: #080b1a88;
+  backdrop-filter: blur(20px);
+}
+.hero-bottom span:last-child {
+  color: var(--muted);
+}
+.hero em {
+  color: var(--pink);
+}
+.concert-card:hover {
+  border-color: #8b5cf680;
+  box-shadow: var(--shadow-hover);
+}
+.concert-cover img {
+  transition: transform var(--duration);
+}
+.concert-card:hover img {
+  transform: scale(1.03);
+}
+.cover-tag,
+.cover-arrow {
+  background: #080b1ad9;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(16px);
+}
+.cover-tag {
+  border-radius: 30px;
+}
+.tone-0 {
+  background: radial-gradient(ellipse at top right, #8b5cf670, transparent), var(--indigo);
+}
+.tone-1 {
+  background: radial-gradient(ellipse at bottom right, #f472b650, transparent), var(--indigo);
+}
+.tone-2 {
+  background: radial-gradient(ellipse at top left, #22d3ee50, transparent), var(--indigo);
+}
+.tone-3 {
+  background: linear-gradient(130deg, #8b5cf640, #22d3ee30), var(--indigo);
+}
+.card-bottom > span:last-child {
+  color: var(--cyan);
+}
+.upcoming-heading {
+  margin-top: var(--space-8);
+}
+.chip.selected:hover {
+  background: #a78bfa;
+  color: var(--midnight);
+}
+.chip:hover,
+.secondary:hover {
+  background: #8b5cf626;
+  border-color: #8b5cf680;
+}
+.chip.selected,
+.tabs .selected {
+  background: var(--purple);
+  color: var(--ink);
+}
+.detail-heading {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--indigo);
+}
+.detail-heading > div {
+  position: relative;
+  z-index: 1;
+}
+.detail-heading p {
+  color: #d5daea;
+}
+.detail-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  opacity: 0.35;
+  border-radius: 0;
+}
+.detail-heading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, #080b1aee, #080b1a44);
+}
+.seat {
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  color: #a7f3d0;
+}
+.seat:hover:not(:disabled) {
+  background: #10b98155;
+  border-color: var(--cyan);
+}
+.seat.selected,
+.seat.selected:hover {
+  background: var(--purple);
+  color: var(--ink);
+}
+.seat.held {
+  color: #fcd34d;
+}
+.seat.sold {
+  color: #fca5a5;
+}
+.legend .available {
+  border-color: var(--success);
+}
+.legend .selected {
+  border-color: var(--purple);
+}
+.legend .held {
+  border-color: var(--warning);
+}
+.legend .sold {
+  border-color: var(--danger);
+}
+.ticket-top {
+  background: linear-gradient(100deg, #8b5cf633, var(--indigo));
+}
+.qr {
+  background: white;
+  padding: 8px;
+  border-radius: 12px;
+}
+.scan-result p {
+  color: inherit;
+}
+.staff-form {
+  border-top: 3px solid var(--cyan);
+}
+th {
+  background: #080b1a55;
+}
+tbody tr:hover {
+  background: #8b5cf609;
+}
+.stat {
+  border-top: 2px solid var(--purple);
+}
+.stat:nth-child(3n + 2) {
+  border-top-color: var(--cyan);
+}
+.stat:nth-child(3n) {
+  border-top-color: var(--pink);
+}
+.admin-shell {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  column-gap: 28px;
+}
+.admin-shell > .eyebrow,
+.admin-shell > .section-title {
+  grid-column: 1 / -1;
+}
+.admin-sidebar {
+  grid-column: 1;
+  grid-row: 3 / span 20;
+  align-self: start;
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+}
+.admin-sidebar button {
+  justify-content: flex-start;
+  text-transform: capitalize;
+}
+.admin-content {
+  min-width: 0;
+}
+.menu-toggle {
+  display: none;
+}
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  z-index: 100;
+  background: var(--indigo);
+  padding: 16px;
+}
+.skip-link:focus {
+  top: 12px;
+}
+.loading-skeletons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 20px 0;
+}
+.skeleton {
+  height: 160px;
+  background: linear-gradient(110deg, var(--indigo), #242944, var(--indigo));
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+}
+.modal {
+  color: var(--ink);
+  width: min(480px, calc(100% - 32px));
+  padding: 28px;
+  background: #171b35f5;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+.modal::backdrop {
+  background: #080b1abf;
+  backdrop-filter: blur(8px);
+}
+.modal .button-row {
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+.chart-row {
+  display: grid;
+  grid-template-columns: 90px 1fr 70px;
+  gap: 16px;
+  align-items: center;
+  margin: 18px 0;
+  font-size: 13px;
+}
+.chart-track {
+  height: 12px;
+  border-radius: 8px;
+  background: var(--midnight);
+  overflow: hidden;
+}
+.chart-fill {
+  height: 100%;
+  min-width: 2px;
+  background: var(--purple);
+  border-radius: inherit;
+}
+.chart-row strong {
+  text-align: right;
+}
+@media (max-width: 1000px) {
+  .concert-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .admin-shell {
+    grid-template-columns: 160px minmax(0, 1fr);
+    gap: 16px;
+  }
+}
+@media (max-width: 700px) {
+  .hero {
+    min-height: 480px;
+    background-position: 60% center;
+  }
+  .hero-copy {
+    max-width: 100%;
+  }
+  .hero h1 {
+    font-size: clamp(38px, 11vw, 49px);
+  }
+  .concert-grid {
+    grid-template-columns: 1fr;
+  }
+  .detail-heading {
+    padding: 24px;
+  }
+  .admin-shell {
+    display: block;
+  }
+  .admin-sidebar {
+    position: static;
+    flex-direction: row;
+    overflow-x: auto;
+    margin-bottom: 24px;
+  }
+  .admin-sidebar button {
+    flex-shrink: 0;
+  }
+  .account {
+    gap: 6px;
+  }
+  header {
+    gap: 10px;
+  }
+  .menu-toggle {
+    display: inline-flex;
+    margin-left: auto;
+  }
+  header nav {
+    display: none;
+  }
+  header nav.is-open {
+    display: flex;
+  }
+  .loading-skeletons {
+    grid-template-columns: 1fr;
+  }
+  .loading-skeletons .skeleton:not(:first-child) {
+    display: none;
+  }
+  .form-grid.three {
+    grid-template-columns: 1fr;
+  }
+  .filter-row {
+    flex-wrap: wrap;
+  }
+  .stat strong {
+    overflow-wrap: anywhere;
+  }
+}
+
+/* Dark labels meet WCAG AA on the exact Electric Purple fill. */
+button:not(.secondary):not(.text-button):not(.chip):not(.seat),
+.button:not(.secondary),
+.chip.selected,
+.tabs .selected,
+.seat.selected {
+  color: var(--midnight);
+}
+button:hover:not(:disabled):not(.secondary):not(.text-button):not(.chip):not(.seat),
+.button:not(.secondary):hover {
+  background: #a78bfa;
+}

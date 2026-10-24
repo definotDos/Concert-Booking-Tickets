@@ -1,0 +1,16 @@
+{
+  "name": "concert-booking-workspace",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix concert-booking-tickets run dev",
+    "dev:frontend": "npm --prefix concert-booking-tickets/frontend run dev",
+    "dev:backend": "npm --prefix concert-booking-tickets/backend run dev",
+    "db:local": "npm --prefix concert-booking-tickets/backend run db:local",
+    "setup": "npm --prefix concert-booking-tickets/backend run setup",
+    "seed": "npm --prefix concert-booking-tickets/backend run seed",
+    "install:all": "npm --prefix concert-booking-tickets install && npm --prefix concert-booking-tickets run install:all",
+    "build": "npm --prefix concert-booking-tickets run build",
+    "test": "npm --prefix concert-booking-tickets run test",
+    "lint": "npm --prefix concert-booking-tickets run lint"
+  }
+}

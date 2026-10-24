@@ -1,0 +1,92 @@
+/* Shared icon sizing and label alignment across every page. */
+.icon {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: middle;
+  pointer-events: none;
+}
+.icon-label,
+.site-header nav a,
+.auth-back,
+.back-link,
+.hero-secondary,
+.spotlight-action,
+.card-bottom > span:last-child,
+.scan-result strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+button:has(> .icon),
+.button:has(> .icon) {
+  gap: 8px;
+}
+.site-header .brand-mark {
+  display: inline-grid;
+  place-items: center;
+}
+.site-header nav a .icon {
+  color: var(--muted);
+}
+.site-header nav a:is(.active, :hover, :focus-visible) .icon {
+  color: inherit;
+}
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.notice > .icon {
+  margin-top: 3px;
+}
+.notice > div {
+  min-width: 0;
+}
+.admin-sidebar button {
+  justify-content: flex-start;
+}
+.card-info .icon-label {
+  display: flex;
+  align-items: baseline;
+}
+.card-info .icon-label .icon {
+  align-self: center;
+}
+/* Keep all role-specific navigation links comfortably inside the header. */
+@media (min-width: 701px) {
+  .site-header nav {
+    margin-left: clamp(0px, 2vw, 32px);
+    gap: clamp(10px, 1.5vw, 24px);
+  }
+  .site-header:has(nav a:nth-child(5)) {
+    height: auto;
+    min-height: 76px;
+    flex-wrap: wrap;
+    padding-block: 14px;
+    gap: 16px;
+  }
+  .site-header nav a {
+    white-space: nowrap;
+  }
+}
+@media (max-width: 700px) {
+  .site-header nav.is-open {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    white-space: normal;
+    overflow: visible;
+  }
+  .site-header nav a {
+    min-height: 44px;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  .site-header nav a.active {
+    background: #8b5cf61f;
+  }
+  .pager {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import './styles/tokens.css';
+:root {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--midnight);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(ellipse at 8% 0%, rgb(139 92 246 / 13%), transparent 40%),
+    radial-gradient(ellipse at 100% 45%, rgb(34 211 238 / 6%), transparent 45%), var(--midnight);
+  background-attachment: fixed;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+button,
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: var(--ink);
+  padding: 13px 21px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+button:hover,
+.button:hover {
+  background: #7445d8;
+}
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+a {
+  color: inherit;
+}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 4px;
+}
+.secondary {
+  background: transparent;
+  border-color: var(--line);
+}
+.secondary:hover {
+  background: var(--indigo);
+}
+.text-button {
+  background: none;
+  text-decoration: underline;
+  font-weight: 500;
+  padding: 8px;
+}
+h1,
+h2,
+h3,
+.brand {
+  font-family: 'Space Grotesk', sans-serif;
+}
+h1 {
+  font-size: clamp(36px, 4.4vw, 62px);
+  line-height: 1.08;
+  letter-spacing: -2.7px;
+  margin: 15px 0 24px;
+}
+h2 {
+  font-size: 30px;
+  letter-spacing: -1px;
+  margin: 12px 0 16px;
+}
+h3 {
+  font-size: 20px;
+  letter-spacing: -0.5px;
+  margin: 12px 0;
+}
+p {
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 8px 0 18px;
+}
+small {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+em {
+  font-style: normal;
+  color: var(--pink);
+}
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+input,
+textarea,
+select {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  background: var(--midnight);
+  color: var(--ink);
+  width: 100%;
+  min-width: 0;
+}
+textarea {
+  resize: vertical;
+}
+select {
+  width: auto;
+}
+hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 24px 0;
+}
+summary {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+fieldset {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  margin: 16px 0;
+  padding: 16px;
+}
+legend {
+  font-weight: 700;
+  font-size: 14px;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 14px;
+}
+th,
+td {
+  text-align: left;
+  padding: 16px;
+  border-bottom: 1px solid var(--line);
+}
+th {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+code {
+  font-family: monospace;
+}
+
+button,
+.button,
+input,
+select {
+  min-height: 44px;
+}
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+option {
+  background: var(--indigo);
+  color: var(--ink);
+}
+::selection {
+  background: var(--purple);
+  color: var(--ink);
+}

@@ -1,0 +1,598 @@
+/* Shared shell and the concert discovery experience. */
+.site-header {
+  height: 76px;
+  padding-inline: max(32px, calc((100% - 1200px) / 2));
+  gap: 32px;
+}
+.site-header nav {
+  margin-right: auto;
+  margin-left: 48px;
+}
+.site-header nav a {
+  font-size: 14px;
+}
+.site-header .account {
+  gap: 10px;
+}
+main {
+  padding-top: 24px;
+}
+.discover-page section {
+  margin-bottom: 40px;
+}
+.discover-page .hero {
+  min-height: 330px;
+  padding: 30px 36px 72px;
+  background-image:
+    linear-gradient(90deg, #080b1af2 0%, #080b1ab3 48%, #080b1a25 100%),
+    url('../assets/concert-crowd.jpg');
+  background-position: center;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+.discover-page .hero-copy {
+  max-width: 76%;
+}
+.discover-page .hero h1 {
+  font-size: clamp(38px, 4.2vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -2.8px;
+  margin: 16px 0;
+}
+.discover-page .hero-copy p {
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+.discover-page .hero-copy .button {
+  gap: 32px;
+}
+.hero-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+.hero-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  font-size: 13px;
+  text-underline-offset: 5px;
+  color: #e0dced;
+}
+.hero-secondary:hover {
+  color: var(--pink);
+}
+.discover-page .hero-bottom {
+  padding: 16px 42px;
+  gap: 16px;
+}
+.hero-note {
+  position: absolute;
+  right: 32px;
+  bottom: 86px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border: 1px solid #ffffff30;
+  border-radius: 14px;
+  background: #101225a6;
+  backdrop-filter: blur(16px);
+  color: #d5daea;
+  font-size: 12px;
+}
+.hero-note strong {
+  display: block;
+  color: var(--ink);
+  margin-top: 4px;
+  font-size: 14px;
+}
+.hero-note-icon {
+  font-size: 28px;
+  color: var(--pink);
+}
+#discover {
+  scroll-margin-top: 24px;
+}
+.discover-page .section-heading {
+  margin: 0 0 22px;
+  position: relative;
+}
+.discover-page .section-heading h2 {
+  font-size: 32px;
+  margin: 8px 0 0;
+}
+.discover-page .section-heading p {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+}
+.discovery-controls {
+  padding: 22px;
+  background: linear-gradient(120deg, #1b1a32, #111527 65%);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  margin-bottom: 30px;
+}
+.search-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.search-heading h2 {
+  margin: 0;
+  font-size: 21px;
+  letter-spacing: -0.6px;
+}
+.search-heading h2 span {
+  color: var(--pink);
+}
+.search-heading > span {
+  color: var(--muted);
+  font-size: 12px;
+}
+.discover-page .search-bar {
+  border-radius: 10px;
+  background: #080b1a;
+  box-shadow: none;
+  padding: 10px;
+  gap: 16px;
+}
+.discover-page .search-bar:focus-within {
+  border-color: #a78bfa;
+  box-shadow: 0 0 0 3px #8b5cf61a;
+}
+.discover-page .search-input,
+.discover-page .city-input {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2px;
+  padding: 0 12px;
+}
+.discover-page .search-input {
+  flex: 1;
+  min-width: 0;
+}
+.discover-page .city-input {
+  width: 26%;
+}
+.discover-page .field-caption {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.1px;
+}
+.discover-page .search-bar input {
+  padding: 6px 0;
+  min-height: 32px;
+  border-radius: 2px;
+}
+.discover-page .search-bar button {
+  min-height: 48px;
+}
+.discover-page .filter-row {
+  margin: 16px 0 0;
+  gap: 16px;
+}
+.discover-page .chip {
+  min-height: 44px;
+  padding: 8px 16px;
+  font-size: 12px;
+  border-radius: 100px;
+}
+.discover-page .filter-row select {
+  min-height: 38px;
+  flex-shrink: 0;
+  max-width: none;
+}
+.active-filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--line);
+  margin-top: 16px;
+  padding-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.active-filters > span {
+  overflow-wrap: anywhere;
+}
+.active-filters button {
+  flex-shrink: 0;
+  color: var(--ink);
+  font-size: 12px;
+}
+.results-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.results-heading h3 {
+  margin: 7px 0 0;
+  font-size: 28px;
+  line-height: 1.2;
+}
+.results-heading .result-count {
+  margin: 0;
+  font-size: 12px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  flex-shrink: 0;
+}
+.discover-page .concert-card {
+  display: flex;
+  flex-direction: column;
+  background: #111527;
+  box-shadow: none;
+}
+.discover-page .concert-cover {
+  height: auto;
+  aspect-ratio: 1.65;
+  flex-shrink: 0;
+}
+.discover-page .card-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 22px;
+}
+.discover-page .card-info h3 {
+  font-size: 21px;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+.card-artist {
+  color: #e2d9ff;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+.concert-date {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  display: grid;
+  min-width: 54px;
+  padding: 9px 12px;
+  text-align: center;
+  border: 1px solid #ffffff40;
+  border-radius: 12px;
+  background: #080b1aeb;
+  box-shadow: 0 4px 16px #00000030;
+}
+.concert-date span {
+  color: var(--pink);
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.concert-date strong {
+  font-size: 24px;
+  line-height: 1.2;
+}
+.discover-page .card-bottom > span:last-child {
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: #8b5cf61a;
+  color: #d7c5ff;
+}
+.discover-page .concert-card:is(:hover, :focus-visible) .card-bottom > span:last-child {
+  background: #8b5cf638;
+}
+#how-it-works {
+  scroll-margin-top: 24px;
+}
+.discover-page .card-info .eyebrow {
+  font-size: 10px;
+  line-height: 1.6;
+}
+.discover-page .card-info p {
+  margin: 0 0 22px;
+  font-size: 13px;
+}
+.discover-page .card-bottom {
+  margin-top: auto;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.discover-page .cover-tag {
+  font-size: 11px;
+}
+.discover-page .empty {
+  border: 1px dashed var(--line);
+  border-radius: 16px;
+  background: #111527;
+}
+.discover-page .promise-strip {
+  padding: 28px;
+  gap: 28px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #11152780;
+}
+.discover-page .promise-strip > div + div {
+  border-left: 1px solid var(--line);
+  padding-left: 28px;
+}
+.discover-page .promise-strip p {
+  margin-bottom: 0;
+}
+@media (max-width: 1000px) {
+  .site-header {
+    gap: 20px;
+    padding-inline: 25px;
+  }
+  .site-header nav {
+    margin-left: 8px;
+    gap: 18px;
+  }
+  .hero-note {
+    display: none;
+  }
+  .discover-page .hero-copy {
+    max-width: 100%;
+  }
+}
+@media (max-width: 700px) {
+  .site-header {
+    height: auto;
+    min-height: 72px;
+    padding: 16px;
+    gap: 12px;
+  }
+  .site-header nav {
+    margin: 0;
+  }
+  .site-header .account {
+    margin-left: auto;
+  }
+  .discover-page section {
+    margin-bottom: 30px;
+  }
+  .discover-page .hero {
+    min-height: 0;
+    padding: 28px 24px 0;
+    background-position: 62% center;
+    border-radius: 16px;
+  }
+  .discover-page .hero h1 {
+    font-size: clamp(36px, 8.7vw, 54px);
+    letter-spacing: -1.9px;
+  }
+  .discover-page .hero .eyebrow {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+  .discover-page .hero-copy {
+    padding-bottom: 28px;
+  }
+  .discover-page .hero-copy p {
+    font-size: 13px;
+  }
+  .discover-page .hero-bottom {
+    position: relative;
+    margin-inline: -24px;
+    padding: 14px 24px;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 9px;
+  }
+  .discover-page .hero-bottom span:last-child {
+    display: block;
+  }
+  .discover-page .section-heading p {
+    position: static;
+    margin-top: 8px;
+  }
+  .discover-page .section-heading h2 {
+    font-size: 29px;
+  }
+  .discovery-controls {
+    padding: 16px;
+  }
+  .search-heading {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .search-heading h2 {
+    font-size: 20px;
+  }
+  .discover-page .search-bar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    padding: 8px;
+    gap: 10px;
+  }
+  .discover-page .search-input,
+  .discover-page .city-input {
+    width: 100%;
+    padding: 8px;
+    border-left: 0;
+  }
+  .discover-page .city-input {
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+  }
+  .discover-page .search-bar button {
+    width: 100%;
+    font-size: 14px;
+  }
+  .discover-page .filter-row {
+    align-items: center;
+  }
+  .discover-page .chips {
+    width: 100%;
+    gap: 8px;
+  }
+  .discover-page .chip {
+    min-height: 44px;
+  }
+  .discover-page .filter-row select {
+    min-height: 44px;
+  }
+  .results-heading {
+    align-items: baseline;
+  }
+  .results-heading h3 {
+    font-size: 20px;
+  }
+  .results-heading .result-count {
+    font-size: 11px;
+    text-align: right;
+    flex-shrink: 1;
+    border: 0;
+    padding: 0;
+  }
+  .discover-page .promise-strip {
+    padding: 24px;
+    gap: 20px;
+  }
+  .discover-page .promise-strip > div {
+    border: 0;
+    padding: 0;
+  }
+  .discover-page .promise-strip > div + div {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding: 20px 0 0;
+  }
+}
+
+/* Discovery hierarchy: introduction, search, results, then booking guidance. */
+.site-header { position: relative; z-index: 5; }
+.skip-link:not(:focus) { clip-path: inset(50%); }
+.site-header .signin-link { border-color: transparent; }
+.discover-page .hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  align-items: center;
+  gap: 32px;
+  padding: 38px 40px 86px;
+  background-image: linear-gradient(90deg, #080b1af5, #080b1a8a 62%, #17122680), url('../assets/concert-crowd.jpg');
+}
+.discover-page .hero-copy { max-width: 100%; }
+.hero-spotlight {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  padding: 22px;
+  background: linear-gradient(145deg, #28243be8, #111322ed);
+  border: 1px solid #ffffff30;
+  border-radius: 16px;
+  text-decoration: none;
+  box-shadow: 0 16px 44px #00000033;
+  backdrop-filter: blur(18px);
+  transition: border-color 180ms, transform 180ms;
+  overflow-wrap: anywhere;
+}
+.hero-spotlight:hover { border-color: #c4b5fd; transform: translateY(-3px); }
+.spotlight-label { display: flex; align-items: center; font-size: 10px; letter-spacing: 1.4px; color: #b8f3fa; }
+.spotlight-label svg { margin-left: auto; }
+.spotlight-artist { margin-top: 24px; font-size: 12px; color: #ded2fa; }
+.hero-spotlight > strong { margin: 7px 0 14px; font-family: var(--font-display); font-size: 25px; line-height: 1.2; }
+.spotlight-details, .spotlight-venue { font-size: 12px; color: #c3c7d8; line-height: 1.6; }
+.spotlight-venue { display: flex; gap: 6px; align-items: center; margin-top: 6px; }
+.spotlight-venue svg { flex-shrink: 0; }
+.spotlight-action { display: flex; justify-content: space-between; border-top: 1px dashed #ffffff30; margin-top: 20px; padding-top: 16px; font-size: 12px; font-weight: 700; }
+.hero-bottom b { margin-inline: 10px; color: var(--purple); }
+.discovery-controls { background: #121526; padding: 24px; margin-bottom: 36px; }
+.discover-page .field-caption { display: flex; align-items: center; gap: 7px; }
+.genre-browser { display: flex; align-items: center; gap: 18px; margin-top: 20px; }
+.genre-caption { flex-shrink: 0; font-size: 12px; color: var(--muted); }
+.discover-page .chip { padding: 8px 15px; border-color: #ffffff18; background: #ffffff03; }
+.discover-page .chip.selected { background: #a78bfa24; border-color: #a78bfa; color: #e0d2ff; }
+.discover-page .chip.selected:hover { background: #a78bfa3b; }
+.filter-tags { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; min-width: 0; }
+.active-filters .filter-tag { font-size: 12px; min-height: 36px; padding: 6px 10px; gap: 8px; max-width: 100%; overflow-wrap: anywhere; text-align: left; }
+.filter-tag svg { flex-shrink: 0; }
+.results-heading { align-items: end; margin-bottom: 24px; }
+.results-heading h3 { display: flex; align-items: center; gap: 12px; font-size: 30px; }
+.results-heading p { font-size: 13px; margin: 8px 0 0; }
+.count-pill { display: inline-grid; place-items: center; min-width: 30px; padding: 4px 9px; border: 1px solid #a78bfa40; border-radius: 9px; background: #8b5cf617; color: #d9c8ff; font-size: 13px; letter-spacing: 0; }
+.results-tools { display: flex; align-items: end; gap: 14px; flex-shrink: 0; }
+.sort-label { color: var(--muted); font-size: 11px; gap: 6px; }
+.sort-label select { min-height: 44px; font-size: 12px; background: #111527; }
+.view-switch { display: flex; padding: 3px; border: 1px solid var(--line); border-radius: 11px; background: #111527; }
+.view-switch button { min-height: 38px; width: 38px; padding: 8px; border: 0; border-radius: 7px; color: var(--muted); }
+.view-switch button[aria-pressed='true'] { background: #8b5cf633; color: #e0d2ff; }
+.discover-page .concert-card { border-radius: 18px; background: linear-gradient(145deg, #161a30, #101322); }
+.discover-page .concert-cover { aspect-ratio: 1.8; }
+.discover-page .poster-type { font-size: clamp(26px, 2.7vw, 38px); padding: 34px 24px; overflow-wrap: anywhere; }
+.discover-page .card-info { padding: 20px; }
+.discover-page .card-info h3 { font-size: 20px; margin: 10px 0 7px; }
+.discover-page .card-bottom { padding-top: 16px; }
+.discover-page .card-bottom > span:last-child { background: #8b5cf62b; padding: 11px 14px; }
+.concert-list { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+.discover-page .concert-list .concert-card { flex-direction: row; }
+.discover-page .concert-list .concert-cover { width: 220px; min-height: 205px; aspect-ratio: auto; }
+.discover-page .concert-list .poster-type { font-size: 27px; }
+.discover-page .concert-list .card-info { min-width: 0; }
+.discover-page .concert-list .card-info p { margin-bottom: 12px; }
+.empty-icon { display: inline-grid; place-items: center; width: 64px; height: 64px; background: #8b5cf61f; color: #c4b5fd; border-radius: 50%; margin-bottom: 8px; }
+.discover-page .booking-guide { margin-top: 56px; padding-top: 36px; border-top: 1px solid var(--line); }
+.discover-page .booking-guide .section-heading p { position: static; margin-top: 10px; }
+.discover-page .booking-guide .section-heading h2 { font-size: 28px; }
+.discover-page .promise-strip { background: transparent; padding: 0; border: 0; gap: 18px; }
+.discover-page .promise-strip > div, .discover-page .promise-strip > div + div { border: 1px solid var(--line); background: #11152799; border-radius: 14px; padding: 24px; }
+.discover-page .promise-strip > div > span { display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: #8b5cf61f; color: #d3bfff; font-size: 12px; }
+@media (max-width: 1000px) {
+  .discover-page .hero { grid-template-columns: minmax(0, 1fr) 260px; padding-inline: 28px; gap: 20px; }
+  .discover-page .hero h1 { font-size: 44px; }
+  .genre-browser { align-items: flex-start; flex-direction: column; gap: 10px; }
+  .results-heading { align-items: start; }
+  .results-heading h3 { font-size: 25px; }
+  .results-heading p { max-width: 300px; }
+}
+@media (max-width: 700px) {
+  .site-header { display: grid; grid-template-columns: 1fr auto; gap: 10px; padding: 14px 16px; }
+  .site-header .brand { grid-column: 1; grid-row: 1; }
+  .site-header .menu-toggle { grid-column: 2; grid-row: 1; }
+  .site-header nav { grid-column: 1 / -1; grid-row: 2; padding: 8px 0; }
+  .site-header .account { display: none; grid-column: 1 / -1; grid-row: 3; margin: 0; padding-top: 10px; border-top: 1px solid var(--line); }
+  .site-header.menu-open .account { display: flex; }
+  .site-header .user-name { margin-right: auto; }
+  .discover-page .hero { grid-template-columns: minmax(0, 1fr); padding: 26px 22px 0; gap: 0; }
+  .discover-page .hero h1 { font-size: clamp(36px, 9vw, 50px); }
+  .discover-page .hero-copy { padding-bottom: 22px; }
+  .hero-actions { gap: 10px 20px; }
+  .hero-spotlight { padding: 16px; margin-bottom: 22px; }
+  .hero-spotlight > strong { font-size: 22px; margin-bottom: 10px; }
+  .hero-spotlight .spotlight-artist, .hero-spotlight .spotlight-venue, .hero-spotlight .spotlight-action { display: none; }
+  .hero-spotlight > strong { margin-top: 12px; }
+  .spotlight-artist { margin-top: 12px; }
+  .spotlight-action { margin-top: 12px; padding-top: 12px; }
+  .discover-page .hero-bottom { margin-inline: -22px; padding: 14px 22px; }
+  .hero-bottom b { margin-inline: 3px; }
+  .discovery-controls { padding: 16px; margin-bottom: 28px; }
+  .genre-browser { margin-top: 16px; }
+  .discover-page .chips { flex-wrap: nowrap; overflow-x: auto; padding: 3px 3px 10px; width: 100%; }
+  .discover-page .chip { flex-shrink: 0; }
+  .genre-browser { min-width: 0; }
+  .results-heading { flex-direction: column; gap: 18px; }
+  .results-heading h3 { font-size: 26px; }
+  .results-heading p { max-width: none; }
+  .results-tools { width: 100%; justify-content: space-between; align-items: center; }
+  .sort-label { flex-direction: row; align-items: center; gap: 10px; }
+  .discover-page .poster-type { font-size: 34px; }
+  .discover-page .concert-list .concert-cover { width: 100px; min-height: 240px; }
+  .discover-page .concert-list .poster-type { font-size: 12px; line-height: 1.4; letter-spacing: 0.2px; padding: 16px 10px; transform: none; }
+  .concert-list .poster-type small { display: none; }
+  .concert-list .cover-tag { left: 7px; top: 10px; font-size: 9px; padding: 5px 7px; }
+  .concert-list .concert-date { bottom: 12px; right: 12px; }
+  .discover-page .concert-list .card-info { padding: 14px; }
+  .discover-page .concert-list .card-info h3 { font-size: 17px; }
+  .discover-page .concert-list .card-info p { font-size: 12px; }
+  .discover-page .concert-list .card-bottom { gap: 10px; }
+  .active-filters { align-items: flex-start; }
+  .discover-page .booking-guide { margin-top: 36px; padding-top: 28px; }
+}
