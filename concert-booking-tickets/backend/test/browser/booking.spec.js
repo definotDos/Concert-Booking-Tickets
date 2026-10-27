@@ -7,11 +7,10 @@ test('browser: register → seat hold → sandbox payment → ticket download �
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
   await page.goto('/');
-  await expect(page.getByRole('heading', { name: 'Be there.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Concert Booking Tickets' })).toBeVisible();
   await expect(page.locator('.concert-card').first()).toBeVisible();
   await page.screenshot({ path: '.local/screenshots/discover-desktop.png', fullPage: true });
-  await page.getByRole('link', { name: 'Sign in' }).click();
-  await page.getByRole('button', { name: 'Create an account', exact: true }).click();
+  await page.getByRole('link', { name: 'Sign up', exact: true }).click();
   await page.getByLabel('Full name').fill('Browser Test');
   await page.getByLabel('Email address').fill(`browser-${Date.now()}@example.test`);
   await page.getByLabel('Password', { exact: true }).fill('Browser-test-password-123');

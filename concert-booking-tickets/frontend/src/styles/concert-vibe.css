@@ -1,5 +1,4 @@
 /* Presentation layer shared by every existing route. */
-body { background: radial-gradient(ellipse at 5% 0%, #6d28d929, transparent 38%), radial-gradient(ellipse at 95% 45%, #155e7524, transparent 40%), #080b1a; background-attachment: fixed; }
 .site-header, .auth-header { background: #080b1ad9; border-bottom-color: #8b5cf62e; }
 .brand { gap: 11px; flex-shrink: 0; }
 .vibe-mark { width: 39px; height: 42px; color: #bda1ff; filter: drop-shadow(0 0 8px #8b5cf6aa); flex-shrink: 0; }

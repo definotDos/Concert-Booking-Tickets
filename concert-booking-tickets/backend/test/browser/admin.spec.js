@@ -10,7 +10,7 @@ test('admin creates and edits directories, configures seating, publishes and can
   await page.goto('/login');
   await page.getByLabel('Email address').fill(process.env.ADMIN_EMAIL);
   await page.getByLabel('Password', { exact: true }).fill(process.env.ADMIN_PASSWORD);
-  await page.getByRole('button', { name: 'Sign in' }).click();
+  await page.locator('form').getByRole('button', { name: 'Sign in', exact: true }).click();
   await page.getByRole('link', { name: 'Manage', exact: true }).click();
   await page.getByRole('button', { name: 'artists', exact: true }).click();
   await page.getByRole('button', { name: '+ Add artist', exact: true }).click();

@@ -14,10 +14,36 @@
 body {
   margin: 0;
   min-width: 320px;
-  background:
+  min-height: 100vh;
+  background-color: var(--midnight);
+  background-image:
+    radial-gradient(ellipse at 50% 38%, rgb(8 11 26 / 65%), transparent 80%),
+    linear-gradient(var(--grid-major-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-major-line) 1px, transparent 1px),
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
     radial-gradient(ellipse at 8% 0%, rgb(139 92 246 / 13%), transparent 40%),
-    radial-gradient(ellipse at 100% 45%, rgb(34 211 238 / 6%), transparent 45%), var(--midnight);
+    radial-gradient(ellipse at 100% 45%, rgb(34 211 238 / 6%), transparent 45%);
+  background-size:
+    100% 100%,
+    calc(var(--grid-size) * 4) calc(var(--grid-size) * 4),
+    calc(var(--grid-size) * 4) calc(var(--grid-size) * 4),
+    var(--grid-size) var(--grid-size),
+    var(--grid-size) var(--grid-size),
+    100% 100%,
+    100% 100%;
+  background-position: center top;
   background-attachment: fixed;
+}
+@media (max-width: 700px) {
+  body {
+    --grid-size: 32px;
+  }
+}
+@media print {
+  body {
+    background-image: none;
+  }
 }
 button,
 input,

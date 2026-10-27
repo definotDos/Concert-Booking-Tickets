@@ -507,7 +507,7 @@ main {
 .hero-bottom b { margin-inline: 10px; color: var(--purple); }
 .discovery-controls { background: #121526; padding: 24px; margin-bottom: 36px; }
 .discover-page .field-caption { display: flex; align-items: center; gap: 7px; }
-.genre-browser { display: flex; align-items: center; gap: 18px; margin-top: 20px; }
+.genre-browser { display: grid; grid-template-columns: 128px minmax(0, 1fr); align-items: center; gap: 16px; margin-top: 16px; }
 .genre-caption { flex-shrink: 0; font-size: 12px; color: var(--muted); }
 .discover-page .chip { padding: 8px 15px; border-color: #ffffff18; background: #ffffff03; }
 .discover-page .chip.selected { background: #a78bfa24; border-color: #a78bfa; color: #e0d2ff; }
@@ -515,7 +515,7 @@ main {
 .filter-tags { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; min-width: 0; }
 .active-filters .filter-tag { font-size: 12px; min-height: 36px; padding: 6px 10px; gap: 8px; max-width: 100%; overflow-wrap: anywhere; text-align: left; }
 .filter-tag svg { flex-shrink: 0; }
-.results-heading { align-items: end; margin-bottom: 24px; }
+.results-heading { align-items: end; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
 .results-heading h3 { display: flex; align-items: center; gap: 12px; font-size: 30px; }
 .results-heading p { font-size: 13px; margin: 8px 0 0; }
 .count-pill { display: inline-grid; place-items: center; min-width: 30px; padding: 4px 9px; border: 1px solid #a78bfa40; border-radius: 9px; background: #8b5cf617; color: #d9c8ff; font-size: 13px; letter-spacing: 0; }
@@ -528,8 +528,15 @@ main {
 .discover-page .concert-card { border-radius: 18px; background: linear-gradient(145deg, #161a30, #101322); }
 .discover-page .concert-cover { aspect-ratio: 1.8; }
 .discover-page .poster-type { font-size: clamp(26px, 2.7vw, 38px); padding: 34px 24px; overflow-wrap: anywhere; }
-.discover-page .card-info { padding: 20px; }
-.discover-page .card-info h3 { font-size: 20px; margin: 10px 0 7px; }
+.discover-page .card-info { padding: 24px; min-width: 0; }
+.discover-page .card-info h3 { font-size: 20px; line-height: 1.4; margin: 12px 0 8px; overflow-wrap: anywhere; }
+.discover-page .concert-grid:not(.concert-list) .card-info h3 { min-height: 2.8em; }
+.discover-page .concert-grid { gap: 24px; align-items: stretch; }
+.discover-page .concert-cover { flex-shrink: 0; }
+.discover-page .card-info .icon-label { align-items: flex-start; line-height: 1.6; }
+.discover-page .card-info .icon-label svg { flex-shrink: 0; margin-top: 3px; }
+.discover-page .card-artist { margin-bottom: 12px; }
+.discovery-controls .search-bar + .genre-browser { padding-top: 16px; border-top: 1px solid var(--line); }
 .discover-page .card-bottom { padding-top: 16px; }
 .discover-page .card-bottom > span:last-child { background: #8b5cf62b; padding: 11px 14px; }
 .concert-list { grid-template-columns: minmax(0, 1fr); gap: 14px; }
@@ -548,7 +555,7 @@ main {
 @media (max-width: 1000px) {
   .discover-page .hero { grid-template-columns: minmax(0, 1fr) 260px; padding-inline: 28px; gap: 20px; }
   .discover-page .hero h1 { font-size: 44px; }
-  .genre-browser { align-items: flex-start; flex-direction: column; gap: 10px; }
+  .genre-browser { grid-template-columns: 112px minmax(0, 1fr); gap: 12px; }
   .results-heading { align-items: start; }
   .results-heading h3 { font-size: 25px; }
   .results-heading p { max-width: 300px; }
@@ -574,7 +581,7 @@ main {
   .discover-page .hero-bottom { margin-inline: -22px; padding: 14px 22px; }
   .hero-bottom b { margin-inline: 3px; }
   .discovery-controls { padding: 16px; margin-bottom: 28px; }
-  .genre-browser { margin-top: 16px; }
+  .genre-browser { grid-template-columns: minmax(0, 1fr); margin-top: 16px; gap: 8px; }
   .discover-page .chips { flex-wrap: nowrap; overflow-x: auto; padding: 3px 3px 10px; width: 100%; }
   .discover-page .chip { flex-shrink: 0; }
   .genre-browser { min-width: 0; }
@@ -593,6 +600,9 @@ main {
   .discover-page .concert-list .card-info h3 { font-size: 17px; }
   .discover-page .concert-list .card-info p { font-size: 12px; }
   .discover-page .concert-list .card-bottom { gap: 10px; }
+  .discover-page .concert-grid { gap: 16px; }
+  .discover-page .concert-grid:not(.concert-list) .card-info h3 { min-height: 0; }
+  .discover-page .card-info { padding: 20px; }
   .active-filters { align-items: flex-start; }
   .discover-page .booking-guide { margin-top: 36px; padding-top: 28px; }
 }

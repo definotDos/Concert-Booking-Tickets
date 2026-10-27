@@ -27,6 +27,9 @@
   --space-6: 24px;
   --space-8: 32px;
   --space-12: 48px;
+  --grid-size: 48px;
+  --grid-line: rgb(139 160 255 / 4%);
+  --grid-major-line: rgb(139 160 255 / 7%);
   --font-body: 'DM Sans', system-ui, sans-serif;
   --font-display: 'Space Grotesk', system-ui, sans-serif;
 }

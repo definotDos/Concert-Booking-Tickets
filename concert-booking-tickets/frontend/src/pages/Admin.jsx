@@ -3,7 +3,7 @@ import { AdminReports, PaymentAudit } from '../components/AdminReports';
 import { RevenueChart } from '../components/RevenueChart';
 import { StatCard } from '../components/UI';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useResource } from '../hooks/useResource';
 import { api, post, date, money } from '../services/api';
 import { Action, Badge, Empty, Loading, Notice, Pager } from '../components/UI';
@@ -88,6 +88,7 @@ function DirectoryForm({ resource, item, onDone, onClose }) {
 }
 function UserControls({ item, refresh }) {
   const [role, setRole] = useState(item.role);
+  if (item.role === 'admin') return <small className="muted">Administrator access is managed by the system operator.</small>;
   return (
     <div className="button-row">
       <select
@@ -120,18 +121,26 @@ function UserControls({ item, refresh }) {
   );
 }
 export function Admin() {
-  const [tab, setTab] = useState('overview');
+  const [params, setParams] = useSearchParams();
+  const sections = ['overview', 'concerts', 'artists', 'venues', 'bookings', 'users', 'payments', 'reports', 'audit'];
+  const tab = sections.includes(params.get('section')) ? params.get('section') : 'overview';
+  const status = params.get('status') || '';
+  return <AdminWorkspace key={`${tab}-${status}`} tab={tab} initialStatus={status} setTab={(section) => setParams({ section })} />;
+}
+function AdminWorkspace({ tab, initialStatus, setTab }) {
   const [page, setPage] = useState(1);
   const [editing, setEditing] = useState(null);
   const [message, setMessage] = useState('');
-  const [filters, setFilters] = useState({ q: '', status: '', sort: 'newest' });
+  const [filters, setFilters] = useState({ q: '', status: initialStatus, sort: 'newest' });
+  const [auditVersion, setAuditVersion] = useState(0);
   const stats = useResource('/admin/stats');
   const list = useResource(
     `/admin/${['overview', 'reports', 'audit'].includes(tab) ? 'concerts' : tab}?${new URLSearchParams({ ...filters, page, limit: 12 })}`,
   );
-  const artists = useResource('/admin/artists?limit=50');
-  const venues = useResource('/admin/venues?limit=50');
+  const artists = useResource('/admin/artists?limit=50', 0, true);
+  const venues = useResource('/admin/venues?limit=50', 0, true);
   function refresh() {
+    setAuditVersion((version) => version + 1);
     list.refresh();
     stats.refresh();
     artists.refresh();
@@ -142,16 +151,28 @@ export function Admin() {
     setMessage('Changes saved.');
     refresh();
   }
+  const descriptions = {
+    overview: ['Dashboard overview', 'Your events, ticket sales, and operations at a glance.'],
+    concerts: ['Concert management', 'Create events, configure seating, and manage publication.'],
+    artists: ['Artist directory', 'Manage the performers behind your events.'],
+    venues: ['Venue directory', 'Keep event locations and timezones up to date.'],
+    bookings: ['Booking management', 'Find reservations, inspect tickets, and process required refunds.'],
+    users: ['People & access', 'Manage customer and staff accounts.'],
+    payments: ['Payment transactions', 'Review payment status and verification for each booking.'],
+    reports: ['Reports & insights', 'Review verified revenue and export your current totals.'],
+    audit: ['Payment audit', 'Trace recorded payment-provider events.'],
+  };
   return (
     <section className="admin-shell">
       <div className="eyebrow">BACKSTAGE / ADMINISTRATION</div>
       <div className="section-title">
-        <h1>Make the night happen.</h1>
+        <div><h1>Make the night happen.</h1><p className="muted">Your backstage workspace. Every event, all in one place.</p></div>
         <Link className="button secondary" to="/staff">
           <Icon name="scan" size={18} /> Open check-in <Icon name="arrowUpRight" size={16} />
         </Link>
       </div>
       <div className="tabs admin-sidebar" aria-label="Administration sections">
+        <span className="admin-nav-label">WORKSPACE</span>
         {[
           'overview',
           'concerts',
@@ -180,6 +201,10 @@ export function Admin() {
         ))}
       </div>
       <div className="admin-content">
+        <div className="section-title admin-section-heading">
+          <div><div className="eyebrow">ADMIN / {tab.toUpperCase()}</div><h2>{descriptions[tab][0]}</h2><p className="muted">{descriptions[tab][1]}</p></div>
+          <button className="secondary" onClick={refresh}>Refresh data</button>
+        </div>
         <Notice error={stats.error || list.error || artists.error || venues.error} />
         <Notice>{message}</Notice>
         {!['overview', 'reports', 'audit'].includes(tab) && (
@@ -199,7 +224,7 @@ export function Admin() {
           </>
         )}
         {tab === 'audit' ? (
-          <PaymentAudit />
+          <PaymentAudit key={auditVersion} />
         ) : tab === 'reports' ? (
           stats.data ? (
             <AdminReports stats={stats.data} />
@@ -212,6 +237,11 @@ export function Admin() {
           ) : (
             stats.data && (
               <>
+                <div className="admin-quick-actions">
+                  <Link className="button" to="/admin?section=concerts"><Icon name="calendar" size={18} /> Manage concerts</Link>
+                  <Link className="button secondary" to="/admin?section=bookings">View bookings</Link>
+                  <Link className="button secondary" to="/admin?section=reports">Export reports <Icon name="arrowUpRight" size={16} /></Link>
+                </div>
                 <div className="stats-grid">
                   {[
                     ['Bookings', stats.data.bookings],
@@ -224,6 +254,10 @@ export function Admin() {
                     <StatCard key={label} label={label} value={value} />
                   ))}
                 </div>
+                <div className="admin-attention-grid">
+                  <Link className="panel admin-attention" to="/admin?section=concerts&status=draft"><Icon name="calendar" /><div><strong>{stats.data.drafts || 0} draft concerts</strong><p>Review events before publishing</p></div><Icon name="arrow" /></Link>
+                  <Link className="panel admin-attention" to="/admin?section=bookings&status=refund_required"><Icon name="payment" /><div><strong>{stats.data.refunds || 0} refunds required</strong><p>Review bookings awaiting a refund</p></div><Icon name="arrow" /></Link>
+                </div>
                 <div className="panel revenue">
                   <div className="eyebrow">VERIFIED PAYMENT REVENUE</div>
                   <h2>
@@ -234,7 +268,18 @@ export function Admin() {
                   <p>Excludes refunds and payments awaiting refund.</p>
                 </div>
                 <RevenueChart rows={stats.data.revenueHistory} />
-                <h2>Recent transactions</h2>
+                <div className="panel admin-upcoming">
+                  <div className="section-title"><h2>Coming up next</h2><Link to="/admin?section=concerts">All concerts →</Link></div>
+                  {stats.data.nextConcerts?.length ? stats.data.nextConcerts.map((concert) => (
+                    <Link className="admin-event-row" to={`/concerts/${concert._id}`} key={concert._id}>
+                      <div className="admin-event-icon"><Icon name="music" /></div>
+                      <div><strong>{concert.title}</strong><p>{concert.artist?.name} · {concert.venue?.name}</p><small>{date(concert.startsAt, concert.venue?.timezone)}</small></div>
+                      <Icon name="arrowUpRight" size={18} />
+                    </Link>
+                  )) : <Empty>No upcoming published concerts. Create and publish an event to get started.</Empty>}
+                </div>
+                <div className="section-title"><h2>Recent transactions</h2><Link to="/admin?section=payments">All payments →</Link></div>
+                {!stats.data.recent.length ? <Empty>No payments yet. Transactions will appear after customers check out.</Empty> :
                 <div className="table-wrap">
                   <table>
                     <thead>
@@ -258,7 +303,7 @@ export function Admin() {
                       ))}
                     </tbody>
                   </table>
-                </div>
+                </div>}
               </>
             )
           )
@@ -297,7 +342,7 @@ export function Admin() {
                 {list.data.items.map((item) => (
                   <article className="panel admin-record" key={item._id}>
                     <div>
-                      <h3>{item.title || item.name || item.reference || item.booking}</h3>
+                      <h3>{item.title || item.name || item.reference || item.booking?.reference || item.providerSession || 'Payment'}</h3>
                       {tab === 'concerts' && (
                         <>
                           <p>
@@ -338,6 +383,7 @@ export function Admin() {
                       )}
                       {tab === 'payments' && (
                         <>
+                          <p>{item.booking?.user?.name || 'Customer unavailable'} · {item.booking?.concert?.title || 'Concert unavailable'}</p>
                           <p>
                             {money(item.amount, item.currency)} · {item.provider}
                           </p>
@@ -349,7 +395,7 @@ export function Admin() {
                       )}
                     </div>
                     <div className="button-row">
-                      {['concerts', 'artists', 'venues'].includes(tab) && (
+                      {['concerts', 'artists', 'venues'].includes(tab) && item.status !== 'cancelled' && (
                         <button className="secondary" onClick={() => setEditing(item)}>
                           Edit
                         </button>
@@ -386,7 +432,7 @@ export function Admin() {
                           Delete
                         </Action>
                       )}
-                      {tab === 'users' && <UserControls item={item} refresh={refresh} />}
+                      {tab === 'users' && <UserControls key={`${item._id}-${item.role}`} item={item} refresh={refresh} />}
                       {tab === 'bookings' && item.status === 'refund_required' && (
                         <Action
                           confirm="Process the full refund through the payment provider?"

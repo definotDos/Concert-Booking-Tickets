@@ -16,6 +16,7 @@ import './styles/discover.css';
 import './styles/auth.css';
 import './styles/icons.css';
 import './styles/concert-vibe.css';
+import './styles/admin.css';
 function Protected({ roles, children }) {
   const { user, loading } = useAuth();
   const location = useLocation();

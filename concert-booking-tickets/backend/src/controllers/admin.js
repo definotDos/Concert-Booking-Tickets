@@ -66,7 +66,7 @@ export async function saveConcert(req, res) {
   res.status(req.params.id ? 200 : 201).json(concert);
 }
 export async function stats(req, res) {
-  const [bookings, tickets, upcoming, available, held, sold, revenue, recent, revenueHistory] =
+  const [bookings, tickets, upcoming, available, held, sold, revenue, recent, revenueHistory, drafts, refunds, nextConcerts] =
     await Promise.all([
       Booking.countDocuments(),
       Ticket.countDocuments({ status: { $ne: 'void' } }),
@@ -106,8 +106,12 @@ export async function stats(req, res) {
         },
         { $sort: { '_id.day': 1 } },
       ]),
+      Concert.countDocuments({ status: 'draft' }),
+      Booking.countDocuments({ status: 'refund_required' }),
+      Concert.find({ status: 'published', startsAt: { $gt: new Date() } })
+        .populate('artist venue').sort({ startsAt: 1 }).limit(5),
     ]);
-  res.json({ bookings, tickets, upcoming, available, held, sold, revenue, recent, revenueHistory });
+  res.json({ bookings, tickets, upcoming, available, held, sold, revenue, recent, revenueHistory, drafts, refunds, nextConcerts });
 }
 export async function listAdmin(req, res) {
   const models = {
@@ -187,6 +191,10 @@ export async function listAdmin(req, res) {
   let query = model.find(filter);
   if (model === Concert) query = query.populate('artist venue');
   if (model === Booking) query = query.populate('user concert');
+  if (model === Payment) query = query.populate({
+    path: 'booking', select: 'reference user concert',
+    populate: [{ path: 'user', select: 'name email' }, { path: 'concert', select: 'title' }],
+  });
   const [items, total] = await Promise.all([
     query
       .sort(sort)

@@ -266,6 +266,10 @@ test('admin statistics count only verified revenue; cancellation voids tickets a
   assert.equal(stats.status, 200);
   assert.equal(stats.body.sold, 2);
   assert.equal(stats.body.revenue.length, 1);
+  assert.equal(stats.body.drafts, await Concert.countDocuments({ status: 'draft' }));
+  assert.equal(stats.body.refunds, await Booking.countDocuments({ status: 'refund_required' }));
+  assert.ok(stats.body.nextConcerts.some((item) => item._id === concert.id));
+  assert.ok(stats.body.nextConcerts.every((item) => item.artist.name && item.venue.name));
   const cancel = await mutate(clients.admin, `/api/admin/concerts/${concert.id}/cancel`);
   assert.equal(cancel.status, 200);
   assert.equal(await Ticket.countDocuments({ concert: concert.id, status: 'valid' }), 0);
@@ -301,6 +305,9 @@ test('admin search, statuses, sorting and pagination filter real records safely'
   );
   assert.equal(payments.status, 200);
   assert.equal(payments.body.total, 1);
+  assert.equal(payments.body.items[0].booking.reference, bookings.body.items[0].reference);
+  assert.ok(payments.body.items[0].booking.user.name);
+  assert.ok(payments.body.items[0].booking.concert.title);
   const sorted = await clients.admin.agent.get('/api/admin/users?sort=name&limit=2&page=2');
   assert.equal(sorted.body.items.length, 2);
   assert.equal(sorted.body.page, 2);

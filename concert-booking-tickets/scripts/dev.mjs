@@ -70,7 +70,7 @@ try {
     commands.push({ name: 'WEB', command: 'npm run dev --prefix frontend' });
   }
 
-  console.log(`Open ${frontendUrl.origin}. Keep the database terminal open.`);
+  console.log(`Open ${frontendUrl.origin}. The backend manages the default local database automatically.`);
   if (commands.length) {
     console.log(
       'Ctrl+C stops services started here. Reused services stay in their original terminals.',

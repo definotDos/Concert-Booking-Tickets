@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node --watch src/server.js",
+    "dev": "node scripts/dev.js",
     "start": "node src/server.js",
     "seed": "node scripts/seed.js",
     "test": "node --test --test-concurrency=1 test/*.test.js",
